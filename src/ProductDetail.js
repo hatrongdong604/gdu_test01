@@ -1,6 +1,8 @@
+// src/ProductDetail.js
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "./supabaseClient";
+import "./ProductDetail.css";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -19,7 +21,7 @@ const ProductDetail = () => {
         if (error) throw error;
         setProduct(data);
       } catch (err) {
-        console.error("Lỗi khi lấy dữ liệu sản phẩm:", err.message);
+        console.error("Lỗi khi lấy dữ liệu sản phẩm:", err?.message || err);
       }
     };
 
@@ -28,108 +30,43 @@ const ProductDetail = () => {
 
   if (!product) {
     return (
-      <div style={{ textAlign: "center", marginTop: "40px" }}>
+      <div className="pd-loading">
         <p>Đang tải thông tin sản phẩm...</p>
       </div>
     );
   }
 
   return (
-    <div
-      style={{
-        maxWidth: "900px",
-        margin: "30px auto",
-        padding: "20px",
-        border: "1px solid #ddd",
-        borderRadius: "10px",
-        backgroundColor: "#fff",
-        boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-      }}
-    >
-      <button
-        onClick={() => navigate(-1)}
-        style={{
-          backgroundColor: "#007bff",
-          color: "#fff",
-          border: "none",
-          padding: "8px 14px",
-          borderRadius: "6px",
-          cursor: "pointer",
-          marginBottom: "20px",
-        }}
-      >
+    <div className="product-detail">
+      <button onClick={() => navigate(-1)} className="back-btn">
         ← Quay lại danh sách
       </button>
 
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "30px",
-          alignItems: "flex-start",
-        }}
-      >
+      <div className="pd-content">
         {/* Hình ảnh sản phẩm */}
-        <div
-          style={{
-            flex: "1 1 300px",
-            maxWidth: "400px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "#f9f9f9",
-            borderRadius: "10px",
-            overflow: "hidden",
-          }}
-        >
-          <img
-            src={product.image}
-            alt={product.title}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-            }}
-          />
+        <div className="product-image">
+          <img src={product.image} alt={product.title} />
         </div>
 
         {/* Thông tin chi tiết */}
-        <div style={{ flex: "1 1 300px" }}>
-          <h2 style={{ marginBottom: "10px" }}>{product.title}</h2>
-          <p
-            style={{ fontSize: "1.2rem", color: "#e63946", fontWeight: "bold" }}
-          >
-            ${product.price}
-          </p>
+        <div className="product-info">
+          <h2 className="pd-title">{product.title}</h2>
 
-          <p style={{ marginTop: "10px", color: "#555" }}>
+          <p className="pd-price">${product.price}</p>
+
+          <p className="pd-rating">
             ⭐ {product.rating_rate} ({product.rating_count} đánh giá)
           </p>
 
-          <p
-            style={{
-              marginTop: "20px",
-              lineHeight: "1.6",
-              color: "#333",
-              textAlign: "justify",
-            }}
-          >
+          <p className="pd-desc">
             {product.description || "Chưa có mô tả cho sản phẩm này."}
           </p>
 
           <button
-            style={{
-              marginTop: "20px",
-              backgroundColor: "#28a745",
-              color: "#fff",
-              border: "none",
-              padding: "10px 16px",
-              borderRadius: "6px",
-              cursor: "pointer",
-            }}
-            onClick={() => alert("Đã thêm vào danh sách sinh viên")}
+            className="add-btn"
+            onClick={() => alert("Đã thêm vào giỏ hàng!")}
           >
-            🛒 Thêm vào danh sách sinh viên
+            🛒 Thêm vào giỏ của tôi
           </button>
         </div>
       </div>
