@@ -1,3 +1,4 @@
+// src/ListProducts_SP.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "./supabaseClient";
@@ -6,6 +7,7 @@ const ListProducts_SP = () => {
   const [listProduct, setListProduct] = useState([]);
   const navigate = useNavigate();
 
+  // ✅ Lấy dữ liệu sản phẩm từ Supabase
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -35,6 +37,7 @@ const ListProducts_SP = () => {
         {listProduct.map((p) => (
           <div
             key={p.id}
+            // ✅ Khi click vào sản phẩm sẽ đi đến trang có hiệu ứng (ProductDetail)
             onClick={() => navigate(`/sanpham/${p.id}`)}
             style={{
               border: "1px solid #ddd",
@@ -42,6 +45,15 @@ const ListProducts_SP = () => {
               padding: "10px",
               textAlign: "center",
               cursor: "pointer",
+              transition: "transform 0.3s ease, box-shadow 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.05)";
+              e.currentTarget.style.boxShadow = "0 4px 15px rgba(0, 0, 0, 0.2)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow = "none";
             }}
           >
             <img
@@ -50,7 +62,7 @@ const ListProducts_SP = () => {
               style={{ height: "180px", objectFit: "contain" }}
             />
             <h4>{p.title}</h4>
-            <p>${p.price}</p>
+            <p style={{ color: "#d33", fontWeight: "bold" }}>${p.price}</p>
             <small>
               ⭐ {p.rating_rate} | ({p.rating_count} đánh giá)
             </small>

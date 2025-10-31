@@ -1,0 +1,29 @@
+.product-detail {
+  padding: 30px;
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-image img {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.product-image img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.add-btn:hover {
+  background-color: #004c99 !important;
+  transform: scale(1.05);
+}
