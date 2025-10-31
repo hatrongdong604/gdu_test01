@@ -48,7 +48,11 @@ const ListProducts_SP = () => {
               src={p.image}
               alt={p.title}
               style={{ height: "180px", objectFit: "contain" }}
-            />
+           
+                
+              
+               
+              />
             <h4>{p.title}</h4>
             <p>${p.price}</p>
             <small>
