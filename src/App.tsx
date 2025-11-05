@@ -1,17 +1,14 @@
+// @ts-nocheck
 import "./styles.css";
-
-// @ts-ignore
-import Layout from "./Layout";
-// @ts-ignore
-import Trang1 from "./Trang1";
-// @ts-ignore
-import Trang2 from "./Trang2";
-// @ts-ignore
-import ListProducts_SP from "./ListProducts_SP";
-// @ts-ignore
-import ProductDetail from "./ProductDetail";
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// ✅ Layout
+import Layout from "./layouts/Layout";
+// ✅ Các trang
+import Trang1 from "./Trang1";
+import Trang2 from "./Trang2";
+import ListProducts_SP from "./ListProducts_SP";
+import ProductDetail from "./ProductDetail";
 
 export default function App() {
   return (
